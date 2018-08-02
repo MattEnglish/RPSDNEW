@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSDNEW", "RPSDNEW\RPSDNEW.csproj", "{8A639D06-EBA2-451F-99DB-CA88BB9CD86C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bots", "Bots\Bots.csproj", "{41A74DD1-C988-45D3-AF96-560E76EF20AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bots", "Bots\Bots.csproj", "{41A74DD1-C988-45D3-AF96-560E76EF20AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralBotConsole", "NeuralBotConsole\NeuralBotConsole.csproj", "{2FA33543-1D0F-47D0-A254-D536C4A049B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{41A74DD1-C988-45D3-AF96-560E76EF20AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41A74DD1-C988-45D3-AF96-560E76EF20AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41A74DD1-C988-45D3-AF96-560E76EF20AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FA33543-1D0F-47D0-A254-D536C4A049B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FA33543-1D0F-47D0-A254-D536C4A049B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FA33543-1D0F-47D0-A254-D536C4A049B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FA33543-1D0F-47D0-A254-D536C4A049B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

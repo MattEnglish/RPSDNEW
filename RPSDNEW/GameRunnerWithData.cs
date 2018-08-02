@@ -40,10 +40,6 @@ namespace RockPaperDynamiteEngine
             return gameData;
         }
 
-
-
-
-
     }
     
 }
