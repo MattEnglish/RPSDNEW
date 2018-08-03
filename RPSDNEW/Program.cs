@@ -25,6 +25,7 @@ namespace RPSDNEW
         {
             
             var gameRunner = new GameRunnerWithData();
+            var data = gameRunner.RunGame(new WaveBot(), new DynamiteBot());
             var leagueData = new LeagueData("", "");
 
             leagueData = LeagueRunner.RunLeague(new WaveBot(), new OrigWaveBot());

@@ -6,3 +6,12 @@ C:\Users\Matth\CSharpProjects\RPSDNEW\Bots\obj\Debug\netstandard1.6\Bots.Assembl
 C:\Users\Matth\CSharpProjects\RPSDNEW\Bots\obj\Debug\netstandard1.6\Bots.dll
 C:\Users\Matth\CSharpProjects\RPSDNEW\Bots\obj\Debug\netstandard1.6\Bots.pdb
 C:\Users\Matth\CSharpProjects\RPSDNEW\Bots\obj\Debug\netstandard1.6\Bots.csprojResolveAssemblyReference.cache
+C:\Users\MAE\Work\Training\RPSDNEW\Bots\bin\Debug\netstandard1.6\Bots.deps.json
+C:\Users\MAE\Work\Training\RPSDNEW\Bots\bin\Debug\netstandard1.6\Bots.dll
+C:\Users\MAE\Work\Training\RPSDNEW\Bots\bin\Debug\netstandard1.6\Bots.pdb
+C:\Users\MAE\Work\Training\RPSDNEW\Bots\obj\Debug\netstandard1.6\Bots.csprojResolveAssemblyReference.cache
+C:\Users\MAE\Work\Training\RPSDNEW\Bots\obj\Debug\netstandard1.6\Bots.csproj.CoreCompileInputs.cache
+C:\Users\MAE\Work\Training\RPSDNEW\Bots\obj\Debug\netstandard1.6\Bots.AssemblyInfoInputs.cache
+C:\Users\MAE\Work\Training\RPSDNEW\Bots\obj\Debug\netstandard1.6\Bots.AssemblyInfo.cs
+C:\Users\MAE\Work\Training\RPSDNEW\Bots\obj\Debug\netstandard1.6\Bots.dll
+C:\Users\MAE\Work\Training\RPSDNEW\Bots\obj\Debug\netstandard1.6\Bots.pdb

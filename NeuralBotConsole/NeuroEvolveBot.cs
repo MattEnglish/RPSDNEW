@@ -9,7 +9,7 @@ using RPSDNEW;
 
 namespace NeuralBotConsole
 {
-    class NeuralBot : IBot
+    class NeuroEvolveBot : IBot
     {
         public string Name { get; }
 
@@ -18,21 +18,16 @@ namespace NeuralBotConsole
         private double EnemyWinsLeft;
         private double DynamiteLeft;
         private double EnemyDynamiteLeft;
-        private NeuralNetworkController network;
+        private CustomNeuralNet network;
         private Random rand;
         public TrainingData CollectedData;
 
 
-        public NeuralBot(int seed = 3, string name = "neuralNet")
+        public NeuroEvolveBot(CustomNeuralNet net, int seed = 3, string name = "NeuroEvolve")
         {
             rand = new Random(seed);
-            network = new NeuralNetworkController();
+            network = net;
             Name = name;
-        }
-
-        public void trainNetwork(TrainingData data)
-        {
-            network.Train(data);
         }
 
         public Weapon GetNextWeaponChoice()
@@ -41,7 +36,8 @@ namespace NeuralBotConsole
             {
                 return (Weapon)rand.Next(3);
             }
-            var probs = network.GetProbVector(currentDrawStreak, MyWinsLeft, EnemyWinsLeft, DynamiteLeft, EnemyDynamiteLeft);
+            var outputs = network.Forward(new double[1,5]{{currentDrawStreak, MyWinsLeft, EnemyWinsLeft, DynamiteLeft, EnemyDynamiteLeft}});
+            var probs = new probVector(outputs[0,0], outputs[0,1], outputs[0,2]);
             CollectedData.AddInputs(currentDrawStreak, MyWinsLeft, EnemyWinsLeft, DynamiteLeft, EnemyDynamiteLeft);
             CollectedData.Outputs.Add(new double[] { probs.dynProb, probs.watProb, probs.rpsProb });
             probs = probs.Normalise();

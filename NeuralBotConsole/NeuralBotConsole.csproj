@@ -81,6 +81,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomNeuralNet.cs" />
+    <Compile Include="FitFunc.cs" />
+    <Compile Include="NeuroEvolveBot.cs" />
     <Compile Include="NeuralBot.cs" />
     <Compile Include="NeuralNetwork.cs" />
     <Compile Include="Program.cs" />
