@@ -20,7 +20,6 @@ namespace NeuralBotConsole
         private double EnemyDynamiteLeft;
         private CustomNeuralNet network;
         private Random rand;
-        public TrainingData CollectedData;
 
 
         public NeuroEvolveBot(CustomNeuralNet net, int seed = 3, string name = "NeuroEvolve")
@@ -36,19 +35,23 @@ namespace NeuralBotConsole
             {
                 return (Weapon)rand.Next(3);
             }
-            var outputs = network.Forward(new double[1,5]{{currentDrawStreak, MyWinsLeft, EnemyWinsLeft, DynamiteLeft, EnemyDynamiteLeft}});
+            var outputs = network.Forward(new double[1,5]{{currentDrawStreak/5, MyWinsLeft/1000, EnemyWinsLeft/1000, DynamiteLeft/100, EnemyDynamiteLeft/100}});
             var probs = new probVector(outputs[0,0], outputs[0,1], outputs[0,2]);
-            CollectedData.AddInputs(currentDrawStreak, MyWinsLeft, EnemyWinsLeft, DynamiteLeft, EnemyDynamiteLeft);
-            CollectedData.Outputs.Add(new double[] { probs.dynProb, probs.watProb, probs.rpsProb });
             probs = probs.Normalise();
             var weaponChoice = rand.NextDouble();
             if (weaponChoice < probs.watProb)
             {
-                return Weapon.WaterBallon;
+                if (EnemyDynamiteLeft > 0)
+                {
+                    return Weapon.WaterBallon;
+                }
             }
             if (weaponChoice < probs.watProb + probs.dynProb)
             {
-                return Weapon.Dynamite;
+                if (DynamiteLeft > 0)
+                {
+                    return Weapon.Dynamite;
+                }
             }
 
             return (Weapon)rand.Next(3);// returns rock, paper, scissors randomly.
@@ -96,7 +99,6 @@ namespace NeuralBotConsole
         EnemyWinsLeft = 1000;
         DynamiteLeft = 100;
         EnemyDynamiteLeft = 100;
-        CollectedData = new TrainingData();
         }
     }
 }
