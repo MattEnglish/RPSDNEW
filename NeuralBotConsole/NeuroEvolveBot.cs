@@ -18,11 +18,11 @@ namespace NeuralBotConsole
         private double EnemyWinsLeft;
         private double DynamiteLeft;
         private double EnemyDynamiteLeft;
-        private CustomNeuralNet network;
+        private INet network;
         private Random rand;
 
 
-        public NeuroEvolveBot(CustomNeuralNet net, int seed = 3, string name = "NeuroEvolve")
+        public NeuroEvolveBot(INet net, int seed = 3, string name = "NeuroEvolve")
         {
             rand = new Random(seed);
             network = net;

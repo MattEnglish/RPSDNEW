@@ -7,27 +7,27 @@ using Accord.Math;
 
 namespace NeuralBotConsole
 {
-    public class CustomNeuralNet : INet
+    public interface INet
     {
-        private int inputLayerSize = 5;
-        private int outputLayerSize = 3;
-        private int hiddenLayerSize = 4;
+        double[,] Forward(double[,] inputs);
+    }
 
-        public double[,] W1;
-        public double[,] W2;
+    public class MyNeuralNet : INet
+    {
+        private int[] Layers;
 
-        private double[,] dJdW1;
-        private double[,] dJdW2;
+        public double[][,] Weights;
+        
 
-        public CustomNeuralNet()
+        public MyNeuralNet(int[] layersSize)
         {
-            W1 = new double[inputLayerSize, hiddenLayerSize];
-            W2 = new double[hiddenLayerSize, outputLayerSize];
+            int numberOfLayers = layersSize.Length;
+            Weights = new double[numberOfLayers-1][,];
+            for (int i = 0; i < numberOfLayers -1; i++)
+            {
+                Weights[i] = new double[layersSize[i],layersSize[i+1]];
+            }
             var r = new Random();
-
-            ApplyFuncToEveryElement(W1, x => r.NextDouble());
-            ApplyFuncToEveryElement(W2, x => r.NextDouble());
-
         }
 
         private static double costFunction(double[,] y, double[,] ry)
@@ -40,6 +40,11 @@ namespace NeuralBotConsole
         public static double Sigmoid(double z)
         {
             return 1 / (1 + Math.Exp(-z));
+        }
+
+        public static double ReLu(double d)
+        {
+            return d > 0 ? d : 0;
         }
 
         public static double SigmoidPrime(double z)
@@ -76,17 +81,14 @@ namespace NeuralBotConsole
 
         public double[,] Forward(double[,] inputs)
         {
-            var x = Matrix.Dot(inputs, W1);
-            var a = sigmoid(x);
-            var y = Matrix.Dot(x, W2);
-            var b = sigmoid(y);
-            return b;
-        }
-
-
-        private void input(int[] x)
-        {
-
+            var a = inputs;
+            for (int i = 0; i < Weights.Length; i++)
+            {
+                var w = Weights[i];
+                a = Matrix.Dot(a, w);
+                a = ApplyFuncToEveryElement(a, ReLu); //applying activation func to every layer?
+            }
+            return a;
         }
     }
 }

@@ -15,32 +15,26 @@ namespace NeuralBotConsole
 {
     class Program
     {
-        private static NeuroEvolveBot getBotGen(int genNumber, IRandomNumberGenerator<double> rand)
+        private static NeuroEvolveBot getBotGen(int genNumber, IRandomNumberGenerator<double> rand, NetworkType networkType)
         {
-            var chromosome = (DoubleArrayChromosome)GetChromosomeGen(genNumber, rand);
-            var net = fitFunc.GetNet(chromosome);
+            var chromosome = (DoubleArrayChromosome)GetChromosomeGen(genNumber, rand, networkType);
+            var net = GetNetHelper.GetNet(chromosome, new int[]{5,4,3});
             return new NeuroEvolveBot(net, genNumber, genNumber.ToString());
         }
 
-        private static IChromosome GetChromosomeGen(int genNumber, IRandomNumberGenerator<double> rand)
+        private static IChromosome GetChromosomeGen(int genNumber, IRandomNumberGenerator<double> rand, NetworkType networkType)
         {
-            var newChromeValues = File.ReadAllLines("Chromosome" + genNumber.ToString()).Select(s => double.Parse(s)).ToArray();
+            var newChromeValues = File.ReadAllLines("Chromosome" + networkType.fileName + genNumber.ToString()).Select(s => double.Parse(s)).ToArray();
             return new DoubleArrayChromosome(rand, rand, rand, newChromeValues);
-        }
-
-        private static void ConvertChromeToNew(int genNumber, int newNumber)
-        {
-            var newChromeValues = File.ReadAllLines("Chromosome" + genNumber.ToString()).Select(s => double.Parse(s)).Select(d => d * 10).ToArray();
-            System.IO.File.WriteAllLines("Chromosome" + newNumber.ToString(), newChromeValues.Select(d => d.ToString()));
         }
 
         private static void RunWaveTest()
         {
             var prevNeuralBots = new List<NeuroEvolveBot>();
             var rand = new ZigguratExponentialGenerator();
-            for (int i = 20; i > 5; i--)
+            for (int i = 2; i > 1; i--)
             {
-                prevNeuralBots.Add(getBotGen(i, rand));
+                prevNeuralBots.Add(getBotGen(i, rand, GenTypes.ReLU));
             }
 
             var leagueRunner = new LeagueRunner();
@@ -54,36 +48,39 @@ namespace NeuralBotConsole
         
         static void Main(string[] args)
         {
-            RunWaveTest();
 
-
-            int largestGen = 19;
             
-  
-                var prevNeuralBots = new List<NeuroEvolveBot>();
-                var rand = new ZigguratExponentialGenerator();
-                for (int i = 9; i < largestGen + 1; i++)
-                {
-                    prevNeuralBots.Add(getBotGen(i, rand));
-                }
+            NetworkType chromType = GenTypes.ReLU;
+
+            int largestGen = 1;
+            var prevNeuralBots = new List<NeuroEvolveBot>();
+            var rand = new ZigguratExponentialGenerator();
+            /*
+                            ;
+
+                            for (int i = 9; i < largestGen + 1; i++)
+                            {
+                                prevNeuralBots.Add(getBotGen(i, rand, chromType));
+                            }*/
 
 
-                var bots = new List<IBot> { new DrawBot() };
+            var bots = new List<IBot> { new WeWillRockYou(), new DrawBot() };
                 bots.AddRange(prevNeuralBots);
 
-                DoubleArrayChromosome doubleChromosome = (DoubleArrayChromosome)GetChromosomeGen(largestGen, rand);
 
-                for (int i = 0; i < 2; i++)
+                DoubleArrayChromosome doubleChromosome = new DoubleArrayChromosome(rand, rand, rand, 32);
+                //DoubleArrayChromosome doubleChromosome = (DoubleArrayChromosome)GetChromosomeGen(largestGen, rand, chromType);
+
+                for (int i = 0; i < 10; i++)
                 {
-
-
-                    var pop = new Population(250, doubleChromosome, new fitFunc(bots), new EliteSelection());
+                    var pop = new Population(100, doubleChromosome, new fitFunc(bots), new RouletteWheelSelection());
                     Console.WriteLine(pop.FitnessMax);
-                    for (int j = 0; j < 40; j++)
+                    for (int j = 0; j < 10; j++)
                     {
                         pop.RunEpoch();
                         Console.WriteLine(pop.FitnessMax);
-                    }
+                        Console.WriteLine(pop.FitnessAvg);
+                }
 
                     var x = new fitFunc(bots).Evaluate(pop.BestChromosome);
                     doubleChromosome = (DoubleArrayChromosome)pop.BestChromosome;
@@ -96,9 +93,11 @@ namespace NeuralBotConsole
                     foreach (var bot in bots)
                     {
                          data = gameRunner.RunGame(newBot, bot);
+                        Console.WriteLine(data);
                     }
                     data = gameRunner.RunGame(newBot, new WaveBot());
-                    bots.Add(newBot);
+                    Console.WriteLine(data);
+                bots.Add(newBot);
                     //if (i % 2 == 1)
                     //{
                     //    bots.RemoveAt(bots.Count - 2);
@@ -108,7 +107,7 @@ namespace NeuralBotConsole
 
                 string[] values = doubleChromosome.Value.Select(d => d.ToString()).ToArray();
 
-                System.IO.File.WriteAllLines("Chromosome" + (largestGen + 1).ToString(), values);
+                System.IO.File.WriteAllLines("Chromosome" + chromType + (largestGen + 1).ToString(), values);
                 largestGen++;
             
         }

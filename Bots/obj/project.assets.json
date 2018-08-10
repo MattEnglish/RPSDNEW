@@ -4328,20 +4328,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Matth\\.nuget\\packages\\": {}
+    "C:\\Users\\MAE\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Matth\\CSharpProjects\\RPSDNEW\\Bots\\Bots.csproj",
+      "projectUniqueName": "C:\\Users\\MAE\\Work\\Training\\RPSDNEW\\Bots\\Bots.csproj",
       "projectName": "Bots",
-      "projectPath": "C:\\Users\\Matth\\CSharpProjects\\RPSDNEW\\Bots\\Bots.csproj",
-      "packagesPath": "C:\\Users\\Matth\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Matth\\CSharpProjects\\RPSDNEW\\Bots\\obj\\",
+      "projectPath": "C:\\Users\\MAE\\Work\\Training\\RPSDNEW\\Bots\\Bots.csproj",
+      "packagesPath": "C:\\Users\\MAE\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\MAE\\Work\\Training\\RPSDNEW\\Bots\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Matth\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\MAE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netstandard1.6"
@@ -4354,6 +4361,11 @@
         "netstandard1.6": {
           "projectReferences": {}
         }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
       }
     },
     "frameworks": {
