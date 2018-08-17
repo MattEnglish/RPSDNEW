@@ -62,7 +62,9 @@ namespace NeuralBotConsole
                 score += GeneralScore(data.P2WinCount, data.P1WinCount, data);
             }
             double scaling = (double)bots.Count();
-            return Math.Max(score+1,0.01)/ scaling;
+            score = Math.Max(score+1,0.01)/ scaling;
+            return Math.Exp(score * 3);
+
         }
 
         private double GeneralScore(int neuroWins, int otherWins, GameData data)

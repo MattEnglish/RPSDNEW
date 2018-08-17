@@ -37,22 +37,22 @@ namespace NeuralBotConsole
             return Matrix.Sum(differnce);
         }
 
-        public static double Sigmoid(double z)
+        /*public static double Sigmoid(double z)
         {
             return 1 / (1 + Math.Exp(-z));
-        }
+        }*/
 
         public static double ReLu(double d)
         {
             return d > 0 ? d : 0;
         }
 
-        public static double SigmoidPrime(double z)
+        /*public static double SigmoidPrime(double z)
         {
             return Math.Exp(-z) / Math.Pow((1 + Math.Exp(-z)), 2);
-        }
+        }*/
 
-        public static double[,] sigmoid(double[,] z)
+        /*public static double[,] sigmoid(double[,] z)
         {
             for (int i = 0; i < z.GetLength(0); i++)
             {
@@ -62,7 +62,7 @@ namespace NeuralBotConsole
                 }
             }
             return z;
-        }
+        }*/
 
         private static double[,] ApplyFuncToEveryElement(double[,] z, Func<double, double> func)
         {
